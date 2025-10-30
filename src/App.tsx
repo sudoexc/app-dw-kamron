@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import AddToHomeGuide from "./pages/AddToHomeGuide"; // 👈 импорт гайда
 
 const queryClient = new QueryClient();
 
@@ -17,11 +18,13 @@ const App = () => {
     if (tg) {
       tg.ready();
 
+      // Настраиваем кнопку в Telegram
       tg.MainButton.setText("📲 Добавить на экран");
       tg.MainButton.show();
 
       tg.MainButton.onClick(() => {
-        tg.openLink("https://app-dw-kamron.vercel.app/");
+        // Открываем гайд по добавлению на экран
+        tg.openLink("https://app-dw-kamron.vercel.app/install");
       });
     }
   }, []);
@@ -34,7 +37,13 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
+              {/* Главная страница */}
               <Route path="/" element={<Index />} />
+              
+              {/* Гайд "Добавить на экран" */}
+              <Route path="/install" element={<AddToHomeGuide />} />
+
+              {/* Страница 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
