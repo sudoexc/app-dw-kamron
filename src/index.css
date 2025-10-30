@@ -2,10 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* === GLOBAL FIXES FOR TELEGRAM MINI APP VIEW === */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0f172a;
+}
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* 👇 безопасные отступы под статусбар и home-индикатор */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+}
+
+/* === DESIGN SYSTEM === */
 @layer base {
   :root {
     --background: 210 40% 98%;
@@ -57,19 +73,12 @@ All colors MUST be HSL.
     --transition-theme: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -79,7 +88,6 @@ All colors MUST be HSL.
 
     --card: 224 71% 15%;
     --card-foreground: 210 40% 98%;
-
     --popover: 224 71% 15%;
     --popover-foreground: 210 40% 98%;
 
@@ -95,21 +103,19 @@ All colors MUST be HSL.
 
     --accent: 263 70% 62%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 222 47% 22%;
     --input: 222 47% 22%;
     --ring: 263 70% 62%;
-    
+
     /* Dark Theme Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(263, 70%, 62%) 0%, hsl(220, 80%, 58%) 100%);
     --gradient-button: linear-gradient(135deg, hsl(263, 70%, 62%) 0%, hsl(220, 80%, 58%) 50%, hsl(263, 70%, 62%) 100%);
     --gradient-card: linear-gradient(145deg, hsla(224, 71%, 18%, 0.75), hsla(222, 47%, 13%, 0.55));
     --gradient-glass: linear-gradient(145deg, hsla(224, 71%, 20%, 0.65), hsla(222, 47%, 15%, 0.45));
     --gradient-header: linear-gradient(135deg, hsl(263, 70%, 62%) 0%, hsl(220, 80%, 58%) 100%);
-    
+
     /* Shadows */
     --shadow-soft: 0 4px 20px hsla(263, 70%, 60%, 0.25);
     --shadow-card: 0 8px 32px hsla(0, 0%, 0%, 0.5);
@@ -144,39 +150,39 @@ All colors MUST be HSL.
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--border) / 0.3);
   }
-  
+
   .glass-header {
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
   }
-  
+
   .hover-lift {
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
   }
-  
+
   .hover-lift:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-card);
   }
-  
+
   .hover-lift:active {
     transform: scale(0.97) translateY(-1px);
   }
-  
+
   .glow-effect {
     box-shadow: var(--shadow-glow);
   }
-  
+
   .input-glow:focus-within {
     box-shadow: var(--shadow-input);
   }
-  
+
   .gradient-shift {
     background: var(--gradient-button);
     background-size: 200% 100%;
     animation: gradientShift 3s ease infinite;
   }
-  
+
   @keyframes gradientShift {
     0%, 100% {
       background-position: 0% 50%;
@@ -185,11 +191,11 @@ All colors MUST be HSL.
       background-position: 100% 50%;
     }
   }
-  
+
   .icon-bounce {
     animation: iconBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  
+
   @keyframes iconBounce {
     0%, 100% {
       transform: translateY(0);
