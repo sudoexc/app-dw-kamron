@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import AddToHomeGuide from "./pages/AddToHomeGuide"; // 👈 импорт гайда
+import AddToHomeGuide from "./pages/AddToHomeGuide";
 
 const queryClient = new QueryClient();
 
@@ -16,18 +16,28 @@ const App = () => {
     const tg = window.Telegram?.WebApp;
 
     if (tg) {
-      tg.ready(); // ✅ сообщаем Telegram, что всё готово
-      tg.expand(); // 🧩 делает fullscreen (без обрезки контента)
-      tg.MainButton.hide(); // 🔻 скрываем нижнюю кнопку — не нужна
+      tg.ready();
+      tg.expand(); // ✅ делает приложение фуллскрин в Telegram
+      console.log("Telegram WebApp expanded");
 
-      // 🧠 Проверяем параметр, переданный при запуске через deep-link
       const startParam = tg?.initDataUnsafe?.start_param;
-      console.log("Telegram start_param:", startParam);
+      console.log("Start param:", startParam);
 
-      // 🚀 Если бот запущен с параметром `addToHomeScreen`, открываем инструкцию
+      // 🔥 Если запущен с deep-link параметром — открыть инструкцию
       if (startParam === "addToHomeScreen") {
         window.location.href = "/install";
       }
+
+      // ✅ Показываем кнопку снизу
+      tg.MainButton.setText("📲 Добавить на экран");
+      tg.MainButton.show();
+
+      // При клике — перезапуск того же Mini App, но с deep-link параметром
+      tg.MainButton.onClick(() => {
+        const botUsername = "videodl_test_bot"; // 🔹 замени на свой username
+        const deepLink = `https://t.me/${botUsername}?startapp=addToHomeScreen`;
+        tg.openTelegramLink(deepLink); // 👈 ключевой момент — открывает в Telegram, не Safari
+      });
     }
   }, []);
 
@@ -39,13 +49,8 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              {/* Главная страница */}
               <Route path="/" element={<Index />} />
-
-              {/* Гайд "Добавить на экран" */}
               <Route path="/install" element={<AddToHomeGuide />} />
-
-              {/* Страница 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
