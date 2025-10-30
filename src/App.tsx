@@ -27,16 +27,8 @@ const App = () => {
         window.location.href = "/install";
       }
 
-      // Настройка основной кнопки
-      tg.MainButton.setText("📲 Добавить на экран");
-      tg.MainButton.show();
-
-      tg.MainButton.onClick(() => {
-        // 🚀 Запускаем бот с deep-link параметром (официальный способ Telegram)
-        const botUsername = "videodl_test_bot"; // 🔹 замени на свой username без @
-        const deepLink = `https://t.me/${botUsername}?startapp=addToHomeScreen`;
-        tg.openLink(deepLink, { try_instant_view: false });
-      });
+      // 🔻 Убираем нижнюю кнопку — Telegram уже сам предлагает “Добавить на экран”
+      tg.MainButton.hide();
     }
   }, []);
 
