@@ -13,19 +13,29 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Telegram Mini App logic
     const tg = window.Telegram?.WebApp;
+
     if (tg) {
       tg.ready();
 
-      // Настраиваем кнопку в Telegram
+      // Проверяем параметр, переданный при старте через deep-link
+      const startParam = tg?.initDataUnsafe?.start_param;
+      console.log("Telegram start_param:", startParam);
+
+      // 🔥 Если бот запущен с ?startapp=addToHomeScreen — откроем инструкцию
+      if (startParam === "addToHomeScreen") {
+        window.location.href = "/install";
+      }
+
+      // Настройка основной кнопки
       tg.MainButton.setText("📲 Добавить на экран");
       tg.MainButton.show();
 
       tg.MainButton.onClick(() => {
-        // 🔥 Открываем редирект как "внешний сайт"
-        const externalRedirect = "https://app-dw-kamron.vercel.app/redirect-external.html?t=" + Date.now();
-        tg.openLink(externalRedirect, { try_instant_view: false });
+        // 🚀 Запускаем бот с deep-link параметром (официальный способ Telegram)
+        const botUsername = "videodl_test_bot"; // 🔹 замени на свой username без @
+        const deepLink = `https://t.me/${botUsername}?startapp=addToHomeScreen`;
+        tg.openLink(deepLink, { try_instant_view: false });
       });
     }
   }, []);
