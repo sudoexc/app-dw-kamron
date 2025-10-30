@@ -17,6 +17,22 @@ const DownloadHistory = () => {
       const stored = localStorage.getItem("downloadHistory");
       if (stored) {
         setHistory(JSON.parse(stored));
+      } else {
+        // 👇 Добавляем тестовые данные при первом запуске
+        const demoHistory: DownloadItem[] = [
+          {
+            id: "demo-1",
+            url: "https://www.tiktok.com/@example/video/123456789",
+            timestamp: Date.now() - 3600000, // 1 час назад
+          },
+          {
+            id: "demo-2",
+            url: "https://www.instagram.com/reel/xyz987/",
+            timestamp: Date.now() - 7200000, // 2 часа назад
+          },
+        ];
+        localStorage.setItem("downloadHistory", JSON.stringify(demoHistory));
+        setHistory(demoHistory);
       }
     };
 
