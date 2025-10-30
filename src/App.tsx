@@ -23,8 +23,9 @@ const App = () => {
       tg.MainButton.show();
 
       tg.MainButton.onClick(() => {
-        // Открываем гайд по добавлению на экран
-        tg.openLink("https://app-dw-kamron.vercel.app/install");
+        // ✅ добавляем ?t=timestamp чтобы телега не кэшировала
+        const url = "https://app-dw-kamron.vercel.app/install?t=" + Date.now();
+        tg.openLink(url, { try_instant_view: false });
       });
     }
   }, []);
