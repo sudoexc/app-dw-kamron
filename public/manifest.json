@@ -1,12 +1,12 @@
 {
   "name": "Video Downloader",
   "short_name": "VidDown",
-  "description": "Download videos from TikTok and Instagram instantly",
-  "start_url": "/",
-  "display": "standalone",
+  "description": "Скачивай видео из TikTok и Instagram без водяных знаков",
+  "start_url": "/?utm_source=homescreen",
+  "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#0f172a",
-  "theme_color": "#4f46e5",
+  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -17,6 +17,12 @@
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
