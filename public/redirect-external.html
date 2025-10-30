@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Redirecting...</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #0f172a;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: system-ui, sans-serif;
+      }
+      .spinner {
+        border: 3px solid rgba(255,255,255,0.2);
+        border-top: 3px solid #4f46e5;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 12px;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spinner"></div>
+    <p>Redirecting to guide...</p>
+
+    <script>
+      // Через маленькую задержку, чтобы WebView точно поняла
+      setTimeout(() => {
+        // Абсолютная ссылка на твой сайт (в Safari/браузере)
+        window.location.href = "https://app-dw-kamron.vercel.app/install?t=" + Date.now();
+      }, 400);
+    </script>
+  </body>
+</html>

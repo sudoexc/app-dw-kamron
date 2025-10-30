@@ -23,9 +23,9 @@ const App = () => {
       tg.MainButton.show();
 
       tg.MainButton.onClick(() => {
-        // ✅ используем редирект, чтобы Telegram не сбрасывал WebApp на start_url
-        const redirectUrl = "https://app-dw-kamron.vercel.app/redirect.html?t=" + Date.now();
-        tg.openLink(redirectUrl, { try_instant_view: false });
+        // 🔥 Открываем редирект как "внешний сайт"
+        const externalRedirect = "https://app-dw-kamron.vercel.app/redirect-external.html?t=" + Date.now();
+        tg.openLink(externalRedirect, { try_instant_view: false });
       });
     }
   }, []);
