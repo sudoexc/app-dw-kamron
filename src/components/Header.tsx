@@ -16,7 +16,7 @@ const Header = () => {
               <Download className="w-6 h-6 drop-shadow-lg" />
             </div>
           </div>
-          <h1 className="text-xl font-bold tracking-tight drop-shadow-md">Video Downloader</h1>
+          <h1 className="text-xl font-bold tracking-tight drop-shadow-md">Kamron Media</h1>
         </div>
         <div className="absolute right-6">
           <ThemeToggle />

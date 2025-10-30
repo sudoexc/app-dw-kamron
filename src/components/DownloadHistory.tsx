@@ -49,7 +49,7 @@ const DownloadHistory = () => {
 
   return (
     <div className="w-full space-y-4 animate-slide-up">
-      <h2 className="text-lg font-bold text-foreground px-1">Download History</h2>
+      <h2 className="text-lg font-bold text-foreground px-1">История загрузок</h2>
       <div className="space-y-3">
         {history.slice(0, 5).map((item, index) => (
           <Card
@@ -66,7 +66,7 @@ const DownloadHistory = () => {
 
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-foreground mb-1.5">
-                  Video downloaded (demo)
+                Загрузка видео (demo)
                 </p>
                 <p className="text-xs text-muted-foreground truncate mb-2 font-medium">
                   {item.url}
