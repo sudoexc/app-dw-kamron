@@ -23,9 +23,9 @@ const App = () => {
       tg.MainButton.show();
 
       tg.MainButton.onClick(() => {
-        // ✅ добавляем ?t=timestamp чтобы телега не кэшировала
-        const url = "https://app-dw-kamron.vercel.app/install?t=" + Date.now();
-        tg.openLink(url, { try_instant_view: false });
+        // ✅ используем редирект, чтобы Telegram не сбрасывал WebApp на start_url
+        const redirectUrl = "https://app-dw-kamron.vercel.app/redirect.html?t=" + Date.now();
+        tg.openLink(redirectUrl, { try_instant_view: false });
       });
     }
   }, []);
@@ -40,7 +40,7 @@ const App = () => {
             <Routes>
               {/* Главная страница */}
               <Route path="/" element={<Index />} />
-              
+
               {/* Гайд "Добавить на экран" */}
               <Route path="/install" element={<AddToHomeGuide />} />
 
