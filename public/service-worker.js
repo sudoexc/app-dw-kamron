@@ -1,48 +1,54 @@
-const CACHE_NAME = "viddown-cache-v1";
-const urlsToCache = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icon-192.png",
-  "/icon-512.png"
-];
+const CACHE_NAME = "viddown-cache-v3";
+const OFFLINE_URL = "/index.html";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
+      return cache.addAll([
+        OFFLINE_URL,
+        "/",
+        "/manifest.json",
+        "/icon-192.png",
+        "/icon-512.png",
+      ]);
     })
   );
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      // ✅ если файл есть в кеше — вернуть его
-      if (response) {
-        return response;
-      }
-
-      // ✅ если нет — пробуем скачать из сети
-      return fetch(event.request).catch(() => {
-        console.warn("⚠️ Offline or failed to fetch:", event.request.url);
-        return new Response("", { status: 200 });
-      });
-    })
-  );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
+    caches.keys().then((names) =>
       Promise.all(
-        cacheNames.map((cacheName) => {
-          if (!cacheWhitelist.includes(cacheName)) {
-            return caches.delete(cacheName);
+        names.map((name) => {
+          if (name !== CACHE_NAME) {
+            return caches.delete(name);
           }
         })
       )
     )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        // при успешной загрузке — кладём в кэш
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, clone);
+        });
+        return response;
+      })
+      .catch(() => {
+        // при оффлайне возвращаем index.html
+        return caches.match(event.request).then((cached) => {
+          return cached || caches.match(OFFLINE_URL);
+        });
+      })
   );
 });
