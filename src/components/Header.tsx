@@ -3,7 +3,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10">
+    <header className="pt-[80px] sticky top-0 z-50 overflow-hidden border-b border-white/10">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-glow to-primary glass-header" 
            style={{ background: 'var(--gradient-header)' }} />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 dark:to-black/20" />
