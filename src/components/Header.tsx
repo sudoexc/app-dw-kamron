@@ -3,7 +3,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   return (
-    <header className="pt-[65px] z-50 overflow-hidden border-b border-white/10 relative">
+    <header className="pt-[71px] z-50 overflow-hidden border-b border-white/10 relative">
       {/* фон ограничен только хедером */}
       <div
         className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary via-primary-glow to-primary glass-header"
