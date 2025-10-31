@@ -3,7 +3,7 @@
   "short_name": "VidDown",
   "description": "Скачивай видео из TikTok и Instagram без водяных знаков",
   "start_url": "/?utm_source=homescreen",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
